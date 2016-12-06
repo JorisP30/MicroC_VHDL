@@ -7,7 +7,6 @@ use ieee.std_logic_ARITH.all;
 library work;
 use work.packageperso.all;
 
-
 -- == ENTITE ==
 ENTITY Full_Soust_4 IS
 	
@@ -27,7 +26,6 @@ signal carry_tempo : std_logic_vector(3 downto 0);
 signal inv_B : std_logic_vector(3 downto 0);
 BEGIN
 
-
 	inv_B <= not B;
 	
 	Soust_Add : Full_Add_4 port map(A , inv_B , '1', Qs , Cout);
@@ -40,6 +38,8 @@ BEGIN
 		end if;	
 	end process;
 
+END BEHV ;
+-- ======================
 
 
 	-- == BOURIN VERSION !!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -57,5 +57,3 @@ BEGIN
 	
 	--Cout <= carry_tempo(3);
 	
-END BEHV ;
--- ======================

@@ -10,8 +10,7 @@ ENTITY Mux_2_1_4bits IS				-- Special Pour sortie FULL ADD
 			A ,B : in std_logic_vector(3 downto 0);
 			Sel , CA , CB , enable: in std_logic;
 			S : out std_logic_vector(3 downto 0);
-			S_c : out std_logic
-			
+			S_c : out std_logic			
 			);
 			
 END Mux_2_1_4bits;
@@ -24,7 +23,7 @@ BEGIN
 		process(Sel , enable)
 		begin
 				if enable = '1' then
-							if sel = '1' then			-- Par rapport au projet : 0 => Soust //  1 => ADD
+							if sel = '1' then		-- Par rapport au projet : 0 => Soust //  1 => ADD
 								S <= A;
 								S_c <= CA;
 							elsif sel = '0' then

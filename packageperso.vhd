@@ -61,7 +61,7 @@ package packageperso is	-- DEFINITION DES BLOCS
 	end component;
 	
 	component AccuA
-	PORT(clock ,  EnableA  , load: in std_logic;
+	PORT(clock , reset,  EnableA  , load: in std_logic;
 			to_bus : inout std_logic_vector(3 downto 0);
 			to_alu  : out std_logic_vector(3 downto 0)
 			);
