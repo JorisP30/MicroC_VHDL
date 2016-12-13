@@ -27,6 +27,9 @@ BEGIN
 	
 	-- A faire un test avec des entiers !!!!!!!!!!!!!!!!!!!!!!! 29 to 0
 	
+	
+	
+	
 	-- Equations logiques ADD
 	Qs(0)  <= (A(0) xor B(0) ) xor Cin;
 	carry_tempo(0) <= (A(0) and B(0)) or (A(0) and Cin) or (B(0) and Cin);

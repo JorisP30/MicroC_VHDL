@@ -19,9 +19,11 @@ END gene_phase;
 ARCHITECTURE BEHV OF gene_phase IS
 BEGIN
 process(clock , reset)
-variable num_phases : std_logic_vector(1 downto 0);--integer range 3 to 0  ;
+variable num_phases : std_logic_vector(1 downto 0); --integer range 3 to 0  ;
+--variable visu_phases : std_logic_vector(3 downto 0);
 begin
 		if reset = '0' then
+					num_phases := "00";
 					Phases <= "0000";
 		elsif reset = '1' then
 					if falling_edge(clock) then					
@@ -29,17 +31,23 @@ begin
 					end if;			
 					if num_phases = 0 then
 						phases <= "0001";
+						--visu_phases :="0001" ;
 					elsif	num_phases = 1 then
 						phases <= "0010";
+						--visu_phases :="0010" ;
 					elsif num_phases = 2 then
 						phases <= "0100";
+						--visu_phases :="0100" ;
 					elsif num_phases = 3 then
 						phases <= "1000";
+						--visu_phases :="1000" ;
 					else
 						phases <= "0000";
+						--visu_phases :="0000" ;
 					end if;		
 		else			
-		end if;		
+		end if;	
+			
 end process;
 		
 END BEHV ;
