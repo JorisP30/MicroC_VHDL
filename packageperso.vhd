@@ -79,7 +79,7 @@ package packageperso is	-- DEFINITION DES BLOCS
 	component MI
 	PORT(	phases , data_RI : in std_logic_vector(3 downto 0);
 			clock : in std_logic;
-			Enables : out std_logic_vector(9 downto 0)
+			Enables : out std_logic_vector(10 downto 0)
 			);
 	end component;
 		
@@ -108,7 +108,7 @@ package packageperso is	-- DEFINITION DES BLOCS
 	
 	
 	-- Package FUNCTION
-	function decod_Instr(num_instr : in std_logic_vector(3 downto 0))
+	function decod_Instr(num_instr , phases: in std_logic_vector(3 downto 0))
 	return  std_logic_vector ;
 	
 	
@@ -117,28 +117,63 @@ package packageperso is	-- DEFINITION DES BLOCS
 end package packageperso;
 
 package body packageperso is
-	function decod_Instr(num_instr : in std_logic_vector(3 downto 0))
+	function decod_Instr(num_instr , phases : in std_logic_vector(3 downto 0))
 	return  std_logic_vector is
 	
 	constant NOP : std_logic_vector(3 downto 0) := "0000";
 	constant ADD : std_logic_vector(3 downto 0) := "0001";
 	constant SUB : std_logic_vector(3 downto 0) := "0010";
 	constant Get_Input : std_logic_vector(3 downto 0) := "0011";
-	variable enable: std_logic_vector(9 downto 0);
+	constant Give_Input : std_logic_vector(3 downto 0) := "0100";
+	constant LDA : std_logic_vector(3 downto 0) := "0101";
+	constant jump : std_logic_vector(3 downto 0) := "0110";
+	constant BRNE : std_logic_vector(3 downto 0) := "0111";
+	constant BRZ : std_logic_vector(3 downto 0) := "1000";
+	constant TAB : std_logic_vector(3 downto 0) := "1001";
+	variable enable : std_logic_vector(10 downto 0);
 	
 	begin
 	
 					case num_instr is
 							when NOP =>
-									enable := "0000000000";
-							when ADD =>
-									enable := "1010101010";
+									enable := "00000000000";
+							-- ==========================		
+							when ADD =>								
+									if phases = 4 then		-- Phases 3
+																		
+											enable := "00110000100";		-- EnablesIstr , LoadB, EnableB actif
+											
+									elsif phases = 8 then	-- Phase 4
+									
+											enable := "11000001001";		-- EnablesALU, EnableA, LoadA, ADDSub actif											
+									else									
+									end if;
+							-- ==========================
 							when SUB =>
-									enable := "0101010101";
-							when Get_Input =>
-									enable := "1111001100";
+									if phases = 4 then		-- Phases 3
+																		
+											enable := "00110000100";		-- EnablesIstr , LoadB, EnableB actif
+											
+									elsif phases = 8 then
+									
+											enable := "11000001000";		-- EnablesALU, EnableA, LoadA, ADDSub actif											
+									else									
+									end if;
+							-- ==========================
+							when LDA =>
+									if phases = 4 then		-- Phases 3
+																		
+											enable := "01010001000";		-- EnableA, LoadA, actif
+											
+									elsif phases = 8 then	-- Phase 4
+									
+											enable := "00000000000";		-- EnableA		-- "01000000000" => pour voir data de AccA sur le bus								
+									else
+									end if;
+							-- ==========================
 							when others => 
-									enable := "0000000000";
+									enable := "00000000000";				-- test
+							-- ==========================
 					end case;
 					return enable ;
 			
