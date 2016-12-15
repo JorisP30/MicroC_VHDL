@@ -39,7 +39,7 @@ BEGIN
 		AccumB : AccuA  port map (clock_B   , resetB , enables(8) , enables(2) , data_bus ,  accuB_to_ALU);
 		Alu1 : ALU port map(enables(0) , enables(10) , accuA_to_ALU , accuB_to_ALU , Carry , Neg , Zero , data_bus);
 		--
-		out_data <= data_bus;
+		out_data <= data_bus;			-- Pour pouvoir visualiser les données du bus interne
 		
 	
 END BEHV ;

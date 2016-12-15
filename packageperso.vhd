@@ -96,23 +96,10 @@ package packageperso is	-- DEFINITION DES BLOCS
 			to_bus : out std_logic_vector(3 downto 0)	
 		  );
 	end component;
-	
-	component Mux_1_1
-	PORT( ReadMem : in std_logic;
-			data_mem : in std_logic_vector(7 downto 0);
-			out_data_mem : out std_logic_vector(7 downto 0)	
-		 );
-	end component;
-	
-	
-	
-	
+		
 	-- Package FUNCTION
 	function decod_Instr(num_instr , phases: in std_logic_vector(3 downto 0))
 	return  std_logic_vector ;
-	
-	
-
 	
 end package packageperso;
 
